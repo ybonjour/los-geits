@@ -1,5 +1,5 @@
 <template>
-  {{ departure.departure }} - {{ departure.to }}
+  {{ formatTime(departure.departure) }} - {{ departure.to }}
 </template>
 
 <script lang="ts">
@@ -11,6 +11,12 @@ export default {
     departure: {
       type:  Object as PropType<DepartureModel>,
       required: true
+    }
+  },
+  methods: {
+    formatTime: (timestamp: number): string => {
+      const date = new Date(timestamp * 1000)
+      return `${date.getHours()}:${date.getMinutes()}`
     }
   }
 }
