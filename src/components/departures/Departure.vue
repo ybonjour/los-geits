@@ -15,8 +15,13 @@ export default {
   },
   methods: {
     formatTime: (timestamp: number): string => {
+      const zeroPadding = (n: number): string => {
+          return `${n < 10 ? '0': ''}${n}`
+      }
+
       const date = new Date(timestamp * 1000)
-      return `${date.getHours()}:${date.getMinutes()}`
+
+      return `${zeroPadding(date.getHours())}:${zeroPadding(date.getMinutes())}`
     }
   }
 }
