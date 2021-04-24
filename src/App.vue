@@ -1,14 +1,16 @@
 <template>
-  <Dashboard />
+  <Dashboard/>
 </template>
 
-<script>
-import Dashboard from '@/components/Dashboard'
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component'
+import Dashboard from '@/components/Dashboard.vue'
 
-export default {
-  name: 'App',
+@Options({
   components: {
-    Dashboard,
+    Dashboard
   }
+})
+export default class App extends Vue {
 }
 </script>

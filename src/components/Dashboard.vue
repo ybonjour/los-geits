@@ -2,8 +2,13 @@
   <h1>Dashboard</h1>
 </template>
 
-<script>
-export default {
-  name: 'Dashboard'
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+
+@Options({
+  props: {
+  }
+})
+export default class Dashboard extends Vue {
 }
 </script>
