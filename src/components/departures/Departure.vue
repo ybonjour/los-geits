@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { DepartureModel } from '@/components/departures/DepartureModel'
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 export default {
   props: {
