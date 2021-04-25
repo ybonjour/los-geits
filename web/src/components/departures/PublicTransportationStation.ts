@@ -1,5 +1,4 @@
 export enum PublicTransportStation {
-  WeissenbuehlTram,
-  WeissenbuehlTrain,
-  Wander
+  Weissenbuehl = 'weissenbuehl',
+  Wander = 'wander'
 }

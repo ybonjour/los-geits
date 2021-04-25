@@ -21,15 +21,11 @@ export default {
       stationDepartures.value = [
         {
           name: 'Weissenbühl (Tram)',
-          departures: await fetchNextDepartures(PublicTransportStation.WeissenbuehlTram)
+          departures: await fetchNextDepartures(PublicTransportStation.Weissenbuehl)
         },
         {
           name: 'Wander',
           departures: await fetchNextDepartures(PublicTransportStation.Wander)
-        },
-        {
-          name: 'Weissenbühl (Train)',
-          departures: await fetchNextDepartures(PublicTransportStation.WeissenbuehlTrain)
         }
       ]
     })
