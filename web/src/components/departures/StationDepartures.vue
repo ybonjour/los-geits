@@ -25,9 +25,6 @@ export default {
 }
 </script>
 <style>
-    * {
-        font-family: sans-serif;
-    }
     .container {
         border: 2px solid #DF2B3F;
         margin: 5px;
