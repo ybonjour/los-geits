@@ -47,7 +47,7 @@ li {
   border-bottom: 1px solid black;
 }
 li:nth-child(even) {
-  background: #7E7A7A;
+  background: #DDDDDD;
 }
 li:last-child {
   border-bottom: 0;
