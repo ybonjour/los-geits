@@ -1,9 +1,9 @@
 <template>
-  <span class="minutes">{{ formatMinutes(departure.departure) }}</span> ({{ formatTime(departure.departure) }}) - {{ departure.to }}
+  <span class="minutes">{{ minutesFormatted(departure) }}</span> ({{ formattedTime(departure) }}) - {{ departure.to }}
 </template>
 
 <script lang="ts">
-import { DepartureModel } from '@/components/departures/DepartureModel'
+import { departureInMinutes, DepartureModel, timeString } from '@/components/departures/DepartureModel'
 import { PropType } from 'vue'
 
 export default {
@@ -14,19 +14,11 @@ export default {
     }
   },
   methods: {
-    formatTime: (timestamp: number): string => {
-      const zeroPadding = (n: number): string => {
-        return `${n < 10 ? '0' : ''}${n}`
-      }
-
-      const date = new Date(timestamp * 1000)
-
-      return `${zeroPadding(date.getHours())}:${zeroPadding(date.getMinutes())}`
+    formattedTime: (departure: DepartureModel): string => {
+      return timeString(departure)
     },
-    formatMinutes: (timestamp: number): string => {
-      const now = new Date()
-      const differenceMs = timestamp - (now.valueOf() / 1000)
-      return `${Math.floor(differenceMs / 60)}\``
+    minutesFormatted: (departure: DepartureModel): string => {
+      return `${departureInMinutes(departure, new Date())}\``
     }
   }
 }
