@@ -1,8 +1,17 @@
 FROM node
+COPY web/package.json /web/package.json
+COPY web/yarn.lock /web/yarn.lock
+
+COPY backend/package.json /backend/package.json
+COPY backend/package-lock.json /backend/package-lock.json
+
+RUN cd /web; yarn install
+RUN cd /backend; npm install
+
 COPY web /web
-RUN cd /web; yarn install; yarn build;
+RUN cd web; yarn build
+
 COPY backend /backend
-RUN cd /backend; npm install;
 
 FROM node
 COPY --from=0 /backend /root/losgeits
