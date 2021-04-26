@@ -2,6 +2,9 @@
   <div v-for="stationDeparture in stationDepartures" :key="stationDeparture.name">
     <StationDepartures :stationDepartures="stationDeparture"/>
   </div>
+  <div v-for="stationBike in stationBikes" :key="stationBike.name">
+    <StationBikes :station-bikes="stationBike"/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -11,16 +14,21 @@ import { PublicTransportStation } from '@/components/departures/PublicTransporta
 import { Ref } from '@vue/reactivity'
 import StationDepartures from '@/components/departures/StationDepartures.vue'
 import { StationDeparturesModel } from '@/components/departures/StationDeparturesModel'
+import { StationBikesModel } from '@/components/bikes/StationBikesModel'
+import { PubliBikeStation } from '@/components/bikes/PubliBikeStation'
+import { fetchBikes } from '@/components/bikes/PubliBikeAPI'
+import StationBikes from '@/components/bikes/StationBikes.vue'
 
 export default {
-  components: {StationDepartures},
+  components: {StationBikes, StationDepartures},
   setup() {
     const stationDepartures: Ref<StationDeparturesModel[] | null> = ref(null)
+    const stationBikes: Ref<StationBikesModel[] | null> = ref(null)
 
     onMounted(async () => {
       stationDepartures.value = [
         {
-          name: 'Weissenbühl (Tram)',
+          name: 'Weissenbühl',
           departures: await fetchNextDepartures(PublicTransportStation.Weissenbuehl)
         },
         {
@@ -28,10 +36,21 @@ export default {
           departures: await fetchNextDepartures(PublicTransportStation.Wander)
         }
       ]
+      stationBikes.value = [
+        {
+          name: 'Beaumont',
+          bikes: await fetchBikes(PubliBikeStation.Beaumont)
+        },
+        {
+          name: 'Wander',
+          bikes: await fetchBikes(PubliBikeStation.Wander)
+        }
+      ]
     })
 
     return {
-      stationDepartures: stationDepartures
+      stationDepartures: stationDepartures,
+      stationBikes: stationBikes
     }
   }
 }

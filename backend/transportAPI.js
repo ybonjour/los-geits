@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 const stationBoardConfigurations = {
   "weissenbuehl": {
     stationId: 8595142,

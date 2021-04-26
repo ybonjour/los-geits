@@ -24,32 +24,32 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
     .container {
         border: 2px solid #DF2B3F;
         margin: 5px;
-        padding: 0px;
+        padding: 0;
     }
     h1 {
         background: #DF2B3F;
         color: #FFFFFF;
         padding: 10px;
-        margin-top: 0px;
+        margin-top: 0;
         margin-bottom: 0px;
     }
     ul {
         list-style-type: none;
-        padding: 0px;
-        margin: 0px
+        padding: 0;
+        margin: 0;
     }
     li {
         padding: 5px;
         border-bottom: 1px solid black;
     }
     li:nth-child(even) {
-        background: #DDD;
+        background: #7E7A7A;
     }
     li:last-child {
-        border-bottom: 0px;
+        border-bottom: 0;
     }
 </style>

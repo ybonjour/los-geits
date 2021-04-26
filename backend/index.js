@@ -1,5 +1,6 @@
 import express from 'express'
 import {fetchNextDepartures} from './transportAPI.js'
+import {fetchBikesAtStation} from './publiBikeAPI.js'
 
 const app = express()
 
@@ -10,6 +11,10 @@ if (staticDirectory) {
   app.use(express.static(staticDirectory))
 }
 
+app.get(`/stations/:stationName/bikes`, async (request, response) => {
+  const { stationName } = request.params
+  response.send(await fetchBikesAtStation(stationName))
+})
 
 app.get('/stations/:stationName/departures', async (request, response) => {
   const { stationName } = request.params
