@@ -1,6 +1,7 @@
 import express from 'express'
 import {fetchNextDepartures} from './transportAPI.js'
 import {fetchBikesAtStation} from './publiBikeAPI.js'
+import {getDirections, places, mode} from './directionsAPI.js'
 
 const app = express()
 
@@ -19,6 +20,10 @@ app.get(`/stations/:stationName/bikes`, async (request, response) => {
 app.get('/stations/:stationName/departures', async (request, response) => {
   const { stationName } = request.params
   response.send(await fetchNextDepartures(stationName))
+})
+
+app.get('/directions', async (request, response) => {
+  response.send(await getDirections(await places.seftigenstrasse52, places.bahnhof, mode.walking))
 })
 
 app.listen(port, () => {
