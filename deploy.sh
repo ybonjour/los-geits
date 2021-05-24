@@ -8,8 +8,8 @@ dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 
 main() {
   local keyfile="${1:-}"
-  local serviceAccount="gcr-full-access@yvu-website.iam.gserviceaccount.com"
-  local image="gcr.io/yvu-website/losgeits"
+  local serviceAccount="gcr-93@los-geits.iam.gserviceaccount.com"
+  local image="gcr.io/los-geits/los-geits"
 
   if [ ! -f "${keyfile}" ]; then
     echo "USAGE: $0 <keyfile>"
