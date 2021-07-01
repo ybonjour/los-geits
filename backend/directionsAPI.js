@@ -20,18 +20,20 @@ export const mode = {
 
 export const places = {
   seftigenstrasse52: {
-    placeId: 'ChIJMaXCl7Q5jkcR4oWPJHgtDhQ'
+    placeId: 'ChIJMaXCl7Q5jkcR4oWPJHgtDhQ',
+    isHome: true,
   },
   bahnhof: {
-    placeId: 'ChIJQfcX1745jkcRK3QdogDUwVU'
+    placeId: 'ChIJQfcX1745jkcRK3QdogDUwVU',
+    isHome: false,
   }
 }
 
-export const getDirections = async (from, to, mode) => {
-  // TODO: uri encoding of parameters
-  const origin = from.placeId
-  const destination = to.placeId
-  const url = `https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${origin}&destination=place_id:${destination}&mode=${mode.name}&key=${apiKey}`
+export const getDirections = async (origin, destination, mode) => {
+  const originId = origin.placeId
+  const destinationId = destination.placeId
+  const modeName = mode.name
+  const url = `https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${originId}&destination=place_id:${destinationId}&mode=${modeName}&key=${apiKey}`
 
   const response = await axios.get(url)
 
