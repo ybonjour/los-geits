@@ -1,12 +1,19 @@
 <template>
-  <span>Walking to {{ destination.name }}: {{ walkingDurationInSeconds }}</span>
+  <h1>{{ destination.name }}</h1>
+  <div v-if="durations">
+    <p>Z Fuess: {{ durations?.walkingInSeconds }} Sekunde</p>
+    <p>Mit em Velo: {{ durations?.bicyclingInSeconds }} Sekunde</p>
+    <p>Mit em Outo: {{ durations?.walkingInSeconds }} Sekunde</p>
+    <p>Mit em ÖV: {{ durations?.transitInSeconds }} Sekunde</p>
+  </div>
 </template>
 
 <script lang="ts">
 import { onMounted, PropType, ref } from 'vue'
 import { DestinationModel } from '@/components/directions/DestinationModel'
 import { Ref } from '@vue/reactivity'
-import { fetchWalkingDurationInSeconds } from '@/components/directions/DirectionsAPI'
+import { fetchDurationInSeconds } from '@/components/directions/DirectionsAPI'
+import { Durations } from '@/components/directions/Durations'
 
 export default {
   props: {
@@ -16,13 +23,18 @@ export default {
     }
   },
   setup(props: { destination: DestinationModel }) {
-    const walkingDurationInSeconds: Ref<number | null> = ref(null)
+    const durations: Ref<Durations | null> = ref(null)
     onMounted(async () => {
-      walkingDurationInSeconds.value = await fetchWalkingDurationInSeconds(props.destination)
+      durations.value = {
+        walkingInSeconds: await fetchDurationInSeconds(props.destination, 'walking'),
+        bicyclingInSeconds: await fetchDurationInSeconds(props.destination, 'bicycling'),
+        drivingInSeconds: await fetchDurationInSeconds(props.destination, 'driving'),
+        transitInSeconds: await fetchDurationInSeconds(props.destination, 'transit')
+      }
     })
 
     return {
-      walkingDurationInSeconds
+      durations
     }
   }
 }
