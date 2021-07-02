@@ -1,13 +1,9 @@
 <template>
-  <Dashboard/>
+  <router-view></router-view>
 </template>
 
-<script lang="ts">
-import Dashboard from '@/components/Dashboard.vue'
-
-export default {
-  components: {
-    Dashboard
-  }
+<style>
+* {
+  font-family: sans-serif;
 }
-</script>
+</style>

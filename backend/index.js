@@ -8,21 +8,17 @@ const app = express()
 const port = process.env.PORT ? process.env.PORT : 80
 const staticDirectory = process.env.STATIC_DIRECTORY
 
-if (staticDirectory) {
-  app.use(express.static(staticDirectory))
-}
-
-app.get(`/stations/:stationName/bikes`, async (request, response) => {
+app.get(`/api/stations/:stationName/bikes`, async (request, response) => {
   const {stationName} = request.params
   response.send(await fetchBikesAtStation(stationName))
 })
 
-app.get('/stations/:stationName/departures', async (request, response) => {
+app.get('/api/stations/:stationName/departures', async (request, response) => {
   const {stationName} = request.params
   response.send(await fetchNextDepartures(stationName))
 })
 
-app.get('/destinations', async (request, response) => {
+app.get('/api/destinations', async (request, response) => {
   const destinations = []
   for (var place in places) {
     if (!places[place].isHome) {
@@ -32,9 +28,8 @@ app.get('/destinations', async (request, response) => {
   response.send({destinations: destinations})
 })
 
-app.get('/directions', async (request, response) => {
+app.get('/api/directions', async (request, response) => {
   const {destination, transportationMode} = request.query
-  console.log(`${destination}, ${transportationMode}`)
   if (!destination || !(places[destination])) {
     response.sendStatus(400)
     return
@@ -51,6 +46,13 @@ app.get('/directions', async (request, response) => {
     mode[transportationMode]
   ))
 })
+
+if (staticDirectory) {
+  app.use(express.static(staticDirectory))
+  app.get('*', (req, res) => {
+    res.sendFile(`${staticDirectory}/index.html`);
+  })
+}
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)

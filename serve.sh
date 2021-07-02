@@ -14,7 +14,7 @@ main() {
   pushd "${dir}"
     docker stop losgeits &> /dev/null || true
 	  docker build -t losgeits .
-	  docker run --rm -p 80:80 -e DIRECTIONS_API_KEY=${DIRECTIONS_API_KEY} --name losgeits losgeits
+	  docker run --rm -it -p 80:80 -e DIRECTIONS_API_KEY=${DIRECTIONS_API_KEY} --name losgeits losgeits
   popd
 }
 
