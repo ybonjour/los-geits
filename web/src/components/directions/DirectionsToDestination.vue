@@ -1,10 +1,25 @@
 <template>
   <h1>{{ destination.name }}</h1>
   <div v-if="durations">
-    <p>Z Fuess: {{ durations?.walkingInSeconds }} Sekunde</p>
-    <p>Mit em Velo: {{ durations?.bicyclingInSeconds }} Sekunde</p>
-    <p>Mit em Outo: {{ durations?.walkingInSeconds }} Sekunde</p>
-    <p>Mit em ÖV: {{ durations?.transitInSeconds }} Sekunde</p>
+    <p><a @click="setMode('walking')">Z Fuess: {{ durations?.walkingInSeconds }} Sekunde</a></p>
+    <p><a @click="setMode('bicycling')">Mit em Velo: {{ durations?.bicyclingInSeconds }} Sekunde</a></p>
+    <p><a @click="setMode('driving')">Mit em Outo: {{ durations?.walkingInSeconds }} Sekunde</a></p>
+    <p><a @click="setMode('transit')">Mit em ÖV: {{ durations?.transitInSeconds }} Sekunde</a></p>
+  </div>
+  <div>
+    <div v-if="mode === 'walking'">
+      Loufe details
+    </div>
+    <BicyclingDetails
+        v-if="mode === 'bicycling'"
+        :destination="destination"
+    />
+    <div v-if="mode === 'driving'">
+      Outo details
+    </div>
+    <div v-if="mode === 'transit'">
+      ÖV details
+    </div>
   </div>
 </template>
 
@@ -14,8 +29,12 @@ import { DestinationModel } from '@/components/directions/DestinationModel'
 import { Ref } from '@vue/reactivity'
 import { fetchDurationInSeconds } from '@/components/directions/DirectionsAPI'
 import { Durations } from '@/components/directions/Durations'
+import BicyclingDetails from '@/components/directions/BicyclingDetails.vue'
 
 export default {
+  components: {
+    BicyclingDetails
+  },
   props: {
     destination: {
       type: Object as PropType<DestinationModel>,
@@ -23,7 +42,12 @@ export default {
     }
   },
   setup(props: { destination: DestinationModel }) {
+    const mode: Ref<String | null> = ref(null)
     const durations: Ref<Durations | null> = ref(null)
+
+    const setMode = (newMode: String) => {
+      mode.value = newMode
+    }
     onMounted(async () => {
       durations.value = {
         walkingInSeconds: await fetchDurationInSeconds(props.destination, 'walking'),
@@ -34,7 +58,9 @@ export default {
     })
 
     return {
-      durations
+      durations,
+      mode,
+      setMode
     }
   }
 }
