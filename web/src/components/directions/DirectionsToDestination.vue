@@ -17,9 +17,7 @@
     <div v-if="mode === 'driving'">
       Outo details
     </div>
-    <div v-if="mode === 'transit'">
-      ÖV details
-    </div>
+    <TransitDetails v-if="mode === 'transit'" :destination="destination"/>
   </div>
 </template>
 
@@ -30,10 +28,12 @@ import { Ref } from '@vue/reactivity'
 import { fetchDurationInSeconds } from '@/components/directions/DirectionsAPI'
 import { Durations } from '@/components/directions/Durations'
 import BicyclingDetails from '@/components/directions/BicyclingDetails.vue'
+import TransitDetails from '@/components/directions/TransitDetails.vue'
 
 export default {
   components: {
-    BicyclingDetails
+    BicyclingDetails,
+    TransitDetails
   },
   props: {
     destination: {
