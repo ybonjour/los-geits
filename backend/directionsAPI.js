@@ -29,6 +29,13 @@ export const places = {
   }
 }
 
+export const getDirectionsUrl = async (origin, destination, mode) => {
+  const originId = origin.placeId
+  const destinationId = destination.placeId
+  const modeName = mode.name
+  return `https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=place_id:${originId}&destination=place_id:${destinationId}&mode=${modeName}`
+}
+
 export const getDirections = async (origin, destination, mode) => {
   const originId = origin.placeId
   const destinationId = destination.placeId

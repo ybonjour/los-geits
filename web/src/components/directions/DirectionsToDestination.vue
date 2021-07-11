@@ -7,9 +7,10 @@
     <p><a @click="setMode('transit')">Mit em ÖV: {{ durations?.transitInSeconds }} Sekunde</a></p>
   </div>
   <div>
-    <div v-if="mode === 'walking'">
-      Loufe details
-    </div>
+    <WalkingDetails
+        v-if="mode === 'walking'"
+        :destination="destination"
+    />
     <BicyclingDetails
         v-if="mode === 'bicycling'"
         :destination="destination"
@@ -17,7 +18,10 @@
     <div v-if="mode === 'driving'">
       Outo details
     </div>
-    <TransitDetails v-if="mode === 'transit'" :destination="destination"/>
+    <TransitDetails
+        v-if="mode === 'transit'"
+        :destination="destination"
+    />
   </div>
 </template>
 
@@ -29,11 +33,13 @@ import { fetchDurationInSeconds } from '@/components/directions/DirectionsAPI'
 import { Durations } from '@/components/directions/Durations'
 import BicyclingDetails from '@/components/directions/BicyclingDetails.vue'
 import TransitDetails from '@/components/directions/TransitDetails.vue'
+import WalkingDetails from '@/components/directions/WalkingDetails.vue'
 
 export default {
   components: {
     BicyclingDetails,
-    TransitDetails
+    TransitDetails,
+    WalkingDetails
   },
   props: {
     destination: {

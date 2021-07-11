@@ -1,7 +1,7 @@
 import express from 'express'
 import {fetchNextDepartures} from './transportAPI.js'
 import {fetchBikesAtStation} from './publiBikeAPI.js'
-import {getDirections, places, mode} from './directionsAPI.js'
+import {getDirections, places, mode, getDirectionsUrl} from './directionsAPI.js'
 
 const app = express()
 
@@ -45,6 +45,27 @@ app.get('/api/directions', async (request, response) => {
     places[destination],
     mode[transportationMode]
   ))
+})
+
+app.get('/api/directions/url', async (request, response) => {
+  const {destination, transportationMode} = request.query
+  if (!destination || !(places[destination])) {
+    response.sendStatus(400)
+    return
+  }
+
+  if (!transportationMode || !(mode[transportationMode])) {
+    response.sendStatus(400)
+    return
+  }
+
+  response.send({
+    mapsUrl: await getDirectionsUrl(
+      places.seftigenstrasse52,
+      places[destination],
+      mode[transportationMode]
+    )
+  })
 })
 
 if (staticDirectory) {

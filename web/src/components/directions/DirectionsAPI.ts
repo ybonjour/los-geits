@@ -15,6 +15,14 @@ export const fetchDurationInSeconds = async (
   transportationMode: string
 ): Promise<number> => {
   const response = await axios.get(`/api/directions?destination=${destination.name}&transportationMode=${transportationMode}`)
-  console.log(JSON.stringify(response.data))
   return response.data.durationInSeconds
+}
+
+
+export const fetchMapsUrl = async (
+  destination: DestinationModel,
+  transportationMode: string
+): Promise<string> => {
+  const response = await axios.get(`/api/directions/url?destination=${destination.name}&transportationMode=${transportationMode}`)
+  return response.data.mapsUrl
 }
