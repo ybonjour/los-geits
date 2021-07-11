@@ -1,10 +1,10 @@
 <template>
   <h1>{{ destination.name }}</h1>
   <div v-if="durations">
-    <p><a @click="setMode('walking')">Z Fuess: {{ durations?.walkingInSeconds }} Sekunde</a></p>
-    <p><a @click="setMode('bicycling')">Mit em Velo: {{ durations?.bicyclingInSeconds }} Sekunde</a></p>
-    <p><a @click="setMode('driving')">Mit em Outo: {{ durations?.walkingInSeconds }} Sekunde</a></p>
-    <p><a @click="setMode('transit')">Mit em ÖV: {{ durations?.transitInSeconds }} Sekunde</a></p>
+    <p><a @click="setMode('walking')">Z Fuess: {{ formatDuration(durations?.walkingInSeconds) }}</a></p>
+    <p><a @click="setMode('bicycling')">Mit em Velo: {{ formatDuration(durations?.bicyclingInSeconds) }}</a></p>
+    <p><a @click="setMode('driving')">Mit em Outo: {{ formatDuration(durations?.drivingInSeconds) }}</a></p>
+    <p><a @click="setMode('transit')">Mit em ÖV: {{ formatDuration(durations?.transitInSeconds) }}</a></p>
   </div>
   <div>
     <WalkingDetails
@@ -48,6 +48,20 @@ export default {
     destination: {
       type: Object as PropType<DestinationModel>,
       required: true
+    }
+  },
+  methods: {
+    formatDuration: (durationInseconds: number): string => {
+      const minutes = Math.ceil(durationInseconds / 60)
+
+      if (minutes < 60) {
+        return `${minutes} Minute`
+      }
+
+      const hours = Math.floor(minutes / 60)
+      const minutesOfHour = minutes % 60
+
+      return `${hours} Stund u ${minutesOfHour} Minute`
     }
   },
   setup(props: { destination: DestinationModel }) {

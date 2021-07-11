@@ -20,11 +20,18 @@ export const mode = {
 
 export const places = {
   seftigenstrasse52: {
+    name: "Seftigenstrasse 52",
     placeId: 'ChIJMaXCl7Q5jkcR4oWPJHgtDhQ',
     isHome: true,
   },
   bahnhof: {
+    name: "Bahnhof",
     placeId: 'ChIJQfcX1745jkcRK3QdogDUwVU',
+    isHome: false,
+  },
+  laenggasse: {
+    name: "Länggass",
+    placeId: 'ChIJDWEotJ85jkcRe8m5VbQYcUE',
     isHome: false,
   }
 }
