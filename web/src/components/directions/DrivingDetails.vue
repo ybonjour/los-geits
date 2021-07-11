@@ -1,5 +1,5 @@
 <template>
-  <directions-map :destination="destination" mode="walking"/>
+  <directions-map :destination="destination" mode="driving"/>
 </template>
 
 <script lang="ts">

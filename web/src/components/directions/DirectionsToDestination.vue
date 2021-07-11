@@ -15,9 +15,10 @@
         v-if="mode === 'bicycling'"
         :destination="destination"
     />
-    <div v-if="mode === 'driving'">
-      Outo details
-    </div>
+    <DrivingDetails
+        v-if="mode === 'driving'"
+        :destination="destination"
+    />
     <TransitDetails
         v-if="mode === 'transit'"
         :destination="destination"
@@ -34,9 +35,11 @@ import { Durations } from '@/components/directions/Durations'
 import BicyclingDetails from '@/components/directions/BicyclingDetails.vue'
 import TransitDetails from '@/components/directions/TransitDetails.vue'
 import WalkingDetails from '@/components/directions/WalkingDetails.vue'
+import DrivingDetails from '@/components/directions/DrivingDetails.vue'
 
 export default {
   components: {
+    DrivingDetails,
     BicyclingDetails,
     TransitDetails,
     WalkingDetails
