@@ -1,11 +1,19 @@
 <template>
-  <div id="selectionContainer">
-    <div v-for="destination in destinations" :key="destination.name">
-      <a @click="selectDetailDestination(destination)">{{ destination.name }}</a>
+  <div class="container">
+    <div class="destinations-container">
+      <div
+          v-for="destination in destinations"
+          :key="destination.name"
+          class="destination-container"
+          @click="selectDetailDestination(destination)"
+          :class="{ active: detailDestination === destination}"
+      >
+        <p>{{ destination.name }}</p>
+      </div>
     </div>
-  </div>
-  <div id="details">
-    <directions-to-destination v-if="detailDestination" :destination="detailDestination"/>
+    <div>
+      <directions-to-destination v-if="detailDestination" :destination="detailDestination"/>
+    </div>
   </div>
 </template>
 
@@ -41,7 +49,28 @@ export default {
 </script>
 
 <style scoped>
-a {
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.destinations-container {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.destination-container {
   cursor: pointer;
+}
+
+.active {
+  font-weight: bold;
+  text-decoration: underline;
 }
 </style>

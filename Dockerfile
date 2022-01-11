@@ -1,4 +1,7 @@
 FROM node
+
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
 COPY web/package.json /web/package.json
 COPY web/yarn.lock /web/yarn.lock
 
@@ -9,6 +12,7 @@ RUN cd /web; yarn install
 RUN cd /backend; npm install
 
 COPY web /web
+RUN cd web; npx browserslist@latest --update-db
 RUN cd web; yarn build
 
 COPY backend /backend
