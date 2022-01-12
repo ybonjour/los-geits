@@ -8,7 +8,6 @@ export default {
 const Template = (args: object) => ({
   components: { Duration },
   setup() {
-    console.log('args', args);
     return { ...args };
   },
   template: '<duration duration-in-seconds="600" icon="walking" :isActive="isActive" />',

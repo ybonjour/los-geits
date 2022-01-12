@@ -1,38 +1,30 @@
 <template>
   <div class="directions-detail-container">
     <div v-if="durations" class="durations-container">
-      <div class="duration-container" @click="setMode('walking')">
-        <div class="mode-icon">
-          <font-awesome-icon icon="walking"/>
-        </div>
-        <div class="duration" :class="{active: mode === 'walking'}">
-          {{ formatDuration(durations?.walkingInSeconds) }}
-        </div>
-      </div>
-      <div class="duration-container" @click="setMode('bicycling')">
-        <div class="mode-icon">
-          <font-awesome-icon icon="bicycle"/>
-        </div>
-        <div class="duration" :class="{active: mode === 'bicycling'}">
-          {{ formatDuration(durations?.bicyclingInSeconds) }}
-        </div>
-      </div>
-      <div class="duration-container" @click="setMode('driving')">
-        <div class="mode-icon">
-          <font-awesome-icon icon="car"/>
-        </div>
-        <div class="duration" :class="{active: mode === 'driving'}">
-          {{ formatDuration(durations?.drivingInSeconds) }}
-        </div>
-      </div>
-      <div class="duration-container" @click="setMode('transit')">
-        <div class="mode-icon">
-          <font-awesome-icon icon="subway"/>
-        </div>
-        <div class="duration" :class="{active: mode === 'transit'}">
-          {{ formatDuration(durations?.transitInSeconds) }}
-        </div>
-      </div>
+      <duration
+        @click="setMode('walking')"
+        icon="walking"
+        :duration-in-seconds="durations?.walkingInSeconds"
+        :isActive="mode === 'walking'"
+        />
+      <duration
+        @click="setMode('bicycling')"
+        icon="bicycle"
+        :duration-in-seconds="durations?.bicyclingInSeconds"
+        :isActive="mode === 'bicycling'"
+        />
+      <duration
+        @click="setMode('driving')"
+        icon="car"
+        :duration-in-seconds="durations?.drivingInSeconds"
+        :isActive="mode === 'driving'"
+        />
+      <duration
+        @click="setMode('transit')"
+        icon="subway"
+        :duration-in-seconds="durations?.transitInSeconds"
+        :isActive="mode === 'transit'"
+        />
     </div>
     <div class="details">
       <WalkingDetails
@@ -65,9 +57,11 @@ import BicyclingDetails from '@/components/directions/BicyclingDetails.vue'
 import TransitDetails from '@/components/directions/TransitDetails.vue'
 import WalkingDetails from '@/components/directions/WalkingDetails.vue'
 import DrivingDetails from '@/components/directions/DrivingDetails.vue'
+import Duration from '@/components/directions/Duration.vue'
 
 export default {
   components: {
+    Duration,
     DrivingDetails,
     BicyclingDetails,
     TransitDetails,
@@ -141,29 +135,7 @@ export default {
   gap: 10px;
 }
 
-.duration-container {
-  border: 1px solid #AAA;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-}
-
-.mode-icon {
-  padding: 20px;
-}
-
-.duration {
-  text-align: center;
-  padding: 5px;
-}
-
 .details {
   flex-grow: 1;
-}
-
-.active {
-  font-weight: bold;
-  text-decoration: underline;
 }
 </style>
