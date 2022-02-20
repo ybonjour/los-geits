@@ -1,20 +1,22 @@
 <template>
-  <div class="container">
-    <div class="destinations-container">
-      <div
-          v-for="destination in destinations"
-          :key="destination.name"
-          class="destination-container"
-          @click="selectDetailDestination(destination)"
-          :class="{ active: detailDestination === destination}"
-      >
-        <p>{{ destination.name }}</p>
+  <selection-and-detail-vertical>
+    <template v-slot:selection>
+      <div class="destinations-container">
+        <div
+            v-for="destination in destinations"
+            :key="destination.name"
+            class="destination-container"
+            @click="selectDetailDestination(destination)"
+            :class="{ active: detailDestination === destination}"
+        >
+          <p>{{ destination.name }}</p>
+        </div>
       </div>
-    </div>
-    <div>
+    </template>
+    <template v-slot:detail>
       <directions-to-destination v-if="detailDestination" :destination="detailDestination"/>
-    </div>
-  </div>
+    </template>
+  </selection-and-detail-vertical>
 </template>
 
 <script lang="ts">
@@ -23,9 +25,11 @@ import { onMounted, ref } from 'vue'
 import { DestinationModel } from '@/components/directions/DestinationModel'
 import { Ref } from '@vue/reactivity'
 import DirectionsToDestination from '@/components/directions/DirectionsToDestination.vue'
+import SelectionAndDetailVertical from '@/components/layouts/SelectionAndDetailVertical.vue'
 
 export default {
   components: {
+    SelectionAndDetailVertical,
     DirectionsToDestination
   },
   setup() {
@@ -49,14 +53,6 @@ export default {
 </script>
 
 <style scoped>
-
-.container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .destinations-container {
   padding-top: 5px;
   padding-bottom: 5px;
