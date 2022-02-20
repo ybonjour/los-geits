@@ -5,17 +5,15 @@ set -o pipefail
 set -o nounset
 
 dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
-root="${dir}/.."
 
-source "${root}/includes/check-tool.bash.inc"
-source "${root}/includes/silent-on-success.bash.inc"
+source "${dir}/includes/check-tool.bash.inc"
+source "${dir}/includes/silent-on-success.bash.inc"
 
 main() {
 	check_tool "gcloud"
 
 	local project="${1:-}"
 	if [ -z "${project}" ]; then
-		(>&2 echo "ERROR: no project provided")
 		usage "${0}"
 	fi
 
@@ -54,7 +52,7 @@ check_path_for_docker() {
 
 usage() {
 	local script="${0}"
-	echo "USAGE: ${script} <gcp project name>  <serviceaccount JSON key>"
+	echo "USAGE: ${script} <gcp project name> <serviceaccount JSON key>"
 	exit 1
 }
 

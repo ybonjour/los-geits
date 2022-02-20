@@ -2,7 +2,7 @@
 
 dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 
-source "${dir}/includes/source-or-message.bash.inc"
+source "${dir}/.gcloud/includes/source-or-message.bash.inc"
 
 main() {
 	local command="${@:1}"
@@ -12,13 +12,13 @@ main() {
 	fi
 
 	source_or_message \
-		"${dir}/project-config.bash.inc" \
-		"Configuration does not exist. Copy ${dir}/project-config.bash.inc.template to ${dir}/projct-config.bash.inc and configure it for your project"
+		"${dir}/.gcloud/gcp-project-config.bash.inc" \
+		"Configuration does not exist. Copy ${dir}/.gcloud/gcp-project-config.bash.inc.template to ${dir}/.gcloud/gcp-projct-config.bash.inc and configure it for your project"
 
 	local project="${GCP_PROJECT}"
-	local key="${GCLOUD_KEY}"
+	local key=".gcloud/${GCLOUD_KEY}"
 
-	./vendor/runtime "gcloud" "./gcloud-scripts/initialize-gcloud.sh ${project} ${key}; gcloud ${command}"
+	./.gcloud/vendor/runtime "gcloud" "./.gcloud/initialize-gcloud.sh ${project} ${key}; gcloud ${command}"
 }
 
 main "$@"

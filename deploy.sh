@@ -3,7 +3,6 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-set -x
 
 dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 
@@ -16,7 +15,7 @@ main() {
   local gcloud="${dir}/gcloud-local"
 
   if [ ! -f "${keyfile}" ]; then
-    echo "USAGE: $0 <keyfile>"
+    echo "USAGE: $0 <keyfile for gcr login>"
     exit 1
   fi
 
@@ -26,8 +25,7 @@ main() {
   fi
 
   pushd "${dir}"
-    ${gcloud} auth activate-service-account ${serviceAccount} --key-file=${keyfile}
-    ${gcloud} auth configure-docker
+    cat "${keyfile}" | docker login -u _json_key --password-stdin https://gcr.io
 	  docker build -t ${image} .
 	  docker push ${image}
     ${gcloud} run deploy los-geits --region=${region} --image=${image} --allow-unauthenticated --set-env-vars "DIRECTIONS_API_KEY=${DIRECTIONS_API_KEY}"
