@@ -22,7 +22,13 @@ main() {
 
 	local full_command="cd /workspace; ${command}"
 
-	docker run --rm --net host -v "${workspace}":/workspace "rethinc/${runtime}:latest" sh -c "${full_command}"
+	local interactive_flag=""
+	if [[ $- == *i* ]]; then
+		interactive_flag="-it"
+	fi
+
+
+	docker run ${interactive_flag} --rm --net host -v "${workspace}":/workspace "rethinc/${runtime}:latest" bash -ce "${full_command}"
 }
 
 usage() {
@@ -32,3 +38,4 @@ usage() {
 }
 
 main "$@"
+
