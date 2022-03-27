@@ -35,12 +35,12 @@ ul {
   width: 100%;
   > li {
     padding: 0;
-    margin: 0;
+    margin: 0 10px 0 10px;
     cursor: pointer;
     list-style: none;
     flex-grow: 1;
-    min-width: 100px;
-    height: 100%;
+    min-width: 50px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
