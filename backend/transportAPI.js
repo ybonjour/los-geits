@@ -29,7 +29,7 @@ export const fetchNextDepartures = async (stationName) => {
     .slice(0, config.limit)
     .map((stationboard) => {
       return {
-        departure: stationboard.stop.departureTimestamp,
+        timestamp: stationboard.stop.departureTimestamp,
         delay: stationboard.stop.delay,
         to: stationboard.to
       }
