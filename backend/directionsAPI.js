@@ -18,20 +18,41 @@ export const mode = {
   }
 }
 
+// See https://developers.google.com/maps/documentation/places/web-service/place-id
 export const places = {
   seftigenstrasse52: {
-    name: "Seftigenstrasse 52",
+    name: 'Seftigenstrasse 52',
     placeId: 'ChIJMaXCl7Q5jkcR4oWPJHgtDhQ',
     isHome: true,
   },
   bahnhof: {
-    name: "Bahnhof",
+    name: 'Bahnhof',
     placeId: 'ChIJQfcX1745jkcRK3QdogDUwVU',
     isHome: false,
   },
   laenggasse: {
-    name: "Länggass",
+    name: 'Länggass',
     placeId: 'ChIJDWEotJ85jkcRe8m5VbQYcUE',
+    isHome: false,
+  },
+  zytglogge: {
+    name: 'Zytglogge',
+    placeId: 'ChIJ2VyJVME5jkcRRrAu5ve6FDI',
+    isHome: false,
+  },
+  wabern: {
+    name: 'Wabere',
+    placeId: 'ChIJXV0U9i04jkcRtsIWne_5p7s',
+    isHome: false,
+  },
+  mattenhof: {
+    name: 'Mattehof',
+    placeId: 'ChIJ8aWvfKU5jkcRng43JSeUtBw',
+    isHome: false,
+  },
+  ballmoos: {
+    name: 'Ballmoos',
+    placeId: 'ChIJOwjh87A6jkcRMOYYQIj_AAQ',
     isHome: false,
   }
 }

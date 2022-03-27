@@ -28,6 +28,7 @@ defineProps<{
 @import '../../assets/styles/colors';
 ul {
   display: flex;
+  flex-wrap: wrap;
   padding: 0;
   margin: 0;
   height: 100%;
@@ -38,7 +39,7 @@ ul {
     cursor: pointer;
     list-style: none;
     flex-grow: 1;
-    min-width: 500px;
+    min-width: 100px;
     height: 100%;
     display: flex;
     align-items: center;

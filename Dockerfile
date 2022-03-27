@@ -1,4 +1,4 @@
-FROM node:17.6.6.0
+FROM node:17.6.0
 
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
@@ -24,5 +24,6 @@ COPY --from=0 /web/dist /root/losgeits/public
 WORKDIR /root/losgeits
 ENV PORT=80
 ENV STATIC_DIRECTORY=/root/losgeits/public
+EXPOSE 80
 ENTRYPOINT "node" "/root/losgeits/index.js"
 

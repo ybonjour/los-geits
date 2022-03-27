@@ -23,6 +23,7 @@ const { destinations, selectedDestination, selectDestination } = useDashboard()
 
 <style scoped lang="scss">
 .container {
+  width: 100vw;
   display: flex;
   flex-direction: column;
   > .navigation {

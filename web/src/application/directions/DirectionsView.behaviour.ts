@@ -18,7 +18,6 @@ export const useDirections = (
   watch(
     () => properties.destination,
     async (newDestination) => {
-      console.log('watch triggered')
       transportationModes.value = await fetchTransportationModes(newDestination)
     },
     { immediate: true }
