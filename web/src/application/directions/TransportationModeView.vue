@@ -25,6 +25,7 @@ const { collapsed, toggleCollapse } = useTransportationMode(properties)
     </div>
     <div v-if="!collapsed" class="details">
       <MapView
+        class="map"
         :destination="destination"
         :transportation-mode-type="transportationMode.type"
       />
@@ -55,6 +56,10 @@ const { collapsed, toggleCollapse } = useTransportationMode(properties)
   }
   > .details {
     border-top: 1px solid $primary;
+
+    > .map {
+      height: 500px;
+    }
   }
 }
 </style>
