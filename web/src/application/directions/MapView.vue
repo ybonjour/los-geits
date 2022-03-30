@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { Destination } from './Destination'
 import { TransportationModeType } from './TransportationMode'
-import { useMap } from './MapView.behaviour'
+import { useMapKey } from './MapView.behaviour'
+import { inject } from '@vue/runtime-core'
 
 const properties = defineProps<{
   destination: Destination
   transportationModeType: TransportationModeType
 }>()
-const { mapsUrl } = useMap(properties)
+const { mapsUrl } = inject(useMapKey)!(properties)
 </script>
 
 <template>

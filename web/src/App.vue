@@ -1,16 +1,13 @@
+<script setup lang="ts">
+import { useMap, useMapKey } from '@/application/directions/MapView.behaviour'
+import { provide } from 'vue'
+
+provide(useMapKey, useMap)
+</script>
+
 <template>
   <router-view />
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'App',
-  setup() {
-    return {}
-  },
-})
-</script>
 
 <style lang="scss">
 @import 'assets/styles/global.scss';

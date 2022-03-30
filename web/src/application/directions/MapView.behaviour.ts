@@ -1,6 +1,6 @@
 import { Destination } from './Destination'
 import { TransportationModeType } from './TransportationMode'
-import { ref, Ref, watch } from 'vue'
+import { InjectionKey, ref, Ref, watch } from 'vue'
 import { fetchMapsUrl } from '@/application/directions/DirectionsAPI'
 
 export interface MapViewProperties {
@@ -11,6 +11,10 @@ export interface MapViewProperties {
 interface MapViewContract {
   mapsUrl: Ref<string | null>
 }
+
+export const useMapKey = Symbol() as InjectionKey<
+  (properties: MapViewProperties) => MapViewContract
+>
 
 export const useMap = (properties: MapViewProperties): MapViewContract => {
   const mapsUrl = ref<string | null>(null)
