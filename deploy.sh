@@ -26,8 +26,7 @@ main() {
 
   pushd "${dir}"
     cat "${keyfile}" | docker login -u _json_key --password-stdin https://gcr.io
-	  docker build -t ${image} --platform linux/amd64 .
-	  docker push ${image}
+	  docker buildx build -t ${image} --platform linux/amd64 --push .
     ${gcloud} run deploy los-geits --region=${region} --image=${image} --allow-unauthenticated --set-env-vars "DIRECTIONS_API_KEY=${DIRECTIONS_API_KEY}"
   popd
 }
