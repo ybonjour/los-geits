@@ -45,9 +45,14 @@ export const places = {
     placeId: 'ChIJXV0U9i04jkcRtsIWne_5p7s',
     isHome: false,
   },
-  mattenhof: {
-    name: 'Mattehof',
-    placeId: 'ChIJ8aWvfKU5jkcRng43JSeUtBw',
+  buempliz: {
+    name: 'Bümpliz',
+    placeId: 'ChIJ3z-R-CE5jkcR876gYS_nmn0',
+    isHome: false,
+  },
+  lyssach: {
+    name: 'Lyssach',
+    placeId: 'ChIJ0YKiUnIujkcRRA6Gm8pAJEk',
     isHome: false,
   },
   ballmoos: {
